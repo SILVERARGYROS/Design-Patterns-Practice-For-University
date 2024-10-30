@@ -10,10 +10,9 @@ using BombCraftingSimulator.WeaponSpecs;
 
 namespace BombCraftingSimulator.MinistryOfNationalDefence
 {
-
     public class ArmyCommand
     {
-        private static readonly object lockObject = new object();
+        //https://refactoring.guru/design-patterns/singleton
         private static ArmyCommand instance;
 
         private IWeaponBlueprint _blueprint;
@@ -25,11 +24,11 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
         }
 
 
-        public static ArmyCommand GetInstance()
+        public static ArmyCommand getInstance()
         {
             if (instance == null)
             {
-                lock (lockObject)
+                lock (instance)
                 {
                     if (instance == null)
                     {
@@ -41,18 +40,24 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
         }
 
         // IWeapon
-        public void RequestsWeapon(ArmyFactory army_factory, WeaponFamilies family, int version)
+        public void RequestsWeapon(ArmyFactory army_factory, WeaponFamily family, int version)
         {
             army_factory.Construct(family, version);
         }
 
         //Make a Request Approval Process to the recipient
         //IWeaponBluePrint
-        public void RequestsWeaponblueprints(CReasearchAndDevelopment rnd, WeaponFamilies family, int version)
+        public void RequestsWeaponΒlueprints(RND rnd, WeaponFamily family, int version)
         {
             rnd.GetBlueprint(family, version);
         }
 
-      
+        public List<String> RequestWeaponTypes(RND rnd) {
+            return rnd.GetWeaponTypes();
+        }
+
+        public List<String> RequestWeaponFamilies(RND rnd) {
+            return rnd.GetWeaponFamilies();
+        }
     }
 }

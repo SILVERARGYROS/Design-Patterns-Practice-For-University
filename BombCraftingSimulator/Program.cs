@@ -3,11 +3,17 @@ using BombCraftingSimulator.Blueprints;
 using BombCraftingSimulator.WeaponSpecs;
 using System.Collections.Generic;
 using BombCraftingSimulator.Weapons;
+using BombCraftingSimulator.MinistryOfNationalDefence;
 
 namespace BombCraftingSimulator {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("Hello World!");
+
+            //https://refactoring.guru/design-patterns/singleton
+            ArmyCommand armyCommand = ArmyCommand.getInstance();
+
+            // might implement a menu here
 
         }
     }

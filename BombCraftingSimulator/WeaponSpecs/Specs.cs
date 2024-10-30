@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.WeaponSpecs {
+
+    public enum WeaponFamily : byte {
+        FAB,
+        JDAM,
+        MOAB,
+        X69
+    }
+
     public enum MetalCasingType {
         Steel,
         Titanium,
         Tungsten,
         DepletedUranium
     }
+
     public enum ExplosiveType {
         HighExplosive,
         Fragmentation,
@@ -18,6 +27,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
         Cluster,
         Thermobaric
     }
+
     public enum GuidanceType {
         Laser,
         GPS,
@@ -26,6 +36,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
         TV,
         Ballistic
     }
+
     public enum FuelType {
         Solid,
         Liquid,
@@ -47,6 +58,27 @@ namespace BombCraftingSimulator.WeaponSpecs {
         FAB9000
     }
 
+    public enum JDAMTypes : byte {
+        GBU_31,
+        GBU_31V,
+        GBU_31V_3,
+        GBU_31V_4
+    }
+
+    public enum x69Types : byte {
+        x69M,
+        x69MK,
+        x69MR
+    }
+
+    public enum MOABTypes : byte {
+        GBU_43,
+        GBU_43V,
+        GBU_43V_3,
+        GBU_43V_4
+
+    }
+
     public enum DetonationType {
         Impact,
         Proximity,
@@ -60,7 +92,9 @@ namespace BombCraftingSimulator.WeaponSpecs {
         AntiPersonnel,
         AntiTank,
         AntiFortification,
-        AntiInfrastructure
+        AntiInfrastructure,
+        Entry_Denial, // new
+        Concealment   // new
     }
 
     public enum VelocityType {
