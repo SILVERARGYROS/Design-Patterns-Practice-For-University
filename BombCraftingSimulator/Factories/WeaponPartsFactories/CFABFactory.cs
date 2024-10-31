@@ -21,7 +21,7 @@ namespace BombCraftingSimulator.Factories
         public CFABFactory(int FABversion)
         {
             // Retrieve the blueprint for the specified version from the repository
-            blueprint = CReasearchAndDevelopment.instance.GetBlueprint(WeaponFamilies.FAB, FABversion);
+            blueprint = RND.instance.GetBlueprint(WeaponFamily.FAB, FABversion);
         }
 
         // Method to create a metal casing blueprint using the details from the retrieved blueprint

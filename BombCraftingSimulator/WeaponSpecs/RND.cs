@@ -29,7 +29,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
             _blueprintRegistry = new Dictionary<(WeaponFamily, int), IWeaponBlueprint>();
         }
 
-        public static void initialize() {
+        public static RND initialize() {
             if (instance == null) {
                 lock (instance) {
                     if(instance == null) {
