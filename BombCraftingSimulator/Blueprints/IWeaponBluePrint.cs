@@ -26,7 +26,7 @@ namespace BombCraftingSimulator.Blueprints {
         int version { get; set; }          // refers to WeaponTypes (e.g.: enum JDAMTypes, MOABTypes etc...)
         VelocityType CruiseSpeed { get; set; }
         WeaponType WeaponType { get; set; }
-        WeaponFamilies WeaponFamily { get; set; }
+        WeaponFamily WeaponFamily { get; set; }
         LauncherType LancherType { get; set; }
         
     }

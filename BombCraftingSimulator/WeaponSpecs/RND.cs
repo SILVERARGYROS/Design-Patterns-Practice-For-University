@@ -10,39 +10,22 @@ using BombCraftingSimulator.Weapons.Bombs;
 namespace BombCraftingSimulator.WeaponSpecs {
     public class RND {
         private static RND instance;
-        //Dictionary<int, IWeaponBlueprint> _blueprintRegistry = new Dictionary<int, IWeaponBlueprint>();
-        //Dictionary<WeaponType, int> _codeRegistry = new Dictionary<WeaponType, int>();
 
-        Dictionary<(WeaponFamily,int), IWeaponBlueprint> _blueprintRegistry;
+        Dictionary<(WeaponFamily,int), WeaponBlueprint> _blueprintRegistry;
 
-        //public int GetCode(WeaponType type)
-        //{
-        //    if (_codeRegistry.ContainsKey(type))
-        //    {
-        //        return _codeRegistry[type];
-        //    }
-        //    // exception handling - check if code exists
-        //    return -1;
-        //}
-
-        private RND() {
-            _blueprintRegistry = new Dictionary<(WeaponFamily, int), IWeaponBlueprint>();
+        public RND() {
+            _blueprintRegistry = new Dictionary<(WeaponFamily, int), WeaponBlueprint>();
+            initializeBlueprintRegistery();
         }
 
-        public static RND initialize() {
-            if (instance == null) {
-                lock (instance) {
-                    if(instance == null) {
-                        instance = new RND();
-                    }
-                }
-            }
-            return instance;
+        private void initializeBlueprintRegistery() {   // Need to implement a more dynamic way later
+            RegisterBlueprint(WeaponFamily.FAB, 0, new WeaponBlueprint());
+            RegisterBlueprint(WeaponFamily.MOAB, 0, new WeaponBlueprint());
+            RegisterBlueprint(WeaponFamily.X69, 0, new WeaponBlueprint());
+            RegisterBlueprint(WeaponFamily.JDAM, 0, new WeaponBlueprint());
         }
 
-
-
-        public IWeaponBlueprint GetBlueprint(WeaponFamily family, int code) {
+        public WeaponBlueprint GetBlueprint(WeaponFamily family, int code) {
             if (_blueprintRegistry.ContainsKey((family, code))) {
                 return _blueprintRegistry[(family, code)];
             }
@@ -50,11 +33,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
             return null;
         }
 
-        //public void RegisterCode(WeaponType type, int code){
-        //    _codeRegistry.Add(type, code);
-        //}
-
-        public void RegisterBlueprint(WeaponFamily family, int code, IWeaponBlueprint blueprint) {
+        public void RegisterBlueprint(WeaponFamily family, int code, WeaponBlueprint blueprint) {
             _blueprintRegistry.Add((family,code), blueprint);
         }
 
@@ -94,14 +73,14 @@ namespace BombCraftingSimulator.WeaponSpecs {
             return familyCodeList;
         }
 
-        // https://stackoverflow.com/questions/972307/how-to-loop-through-all-enum-values-in-c
+        // How to loop through all enum values in C#: https://stackoverflow.com/questions/972307/how-to-loop-through-all-enum-values-in-c
         public List<String> GetWeaponTypes() {
             List<String> types = new List<String>();
 
             foreach (WeaponType type in Enum.GetValues(typeof(WeaponType))) {
                 switch (type) {
                     case WeaponType.AntiPersonnel:
-                    types.Add("AntiPersonnel");
+                        types.Add("AntiPersonnel");
                     break;
                     case WeaponType.AntiTank:
                         types.Add("AntiTank");
@@ -151,5 +130,25 @@ namespace BombCraftingSimulator.WeaponSpecs {
                 yield return stat;
             }
         }
+
+
+
+
+        //Dictionary<int, IWeaponBlueprint> _blueprintRegistry = new Dictionary<int, IWeaponBlueprint>();
+        //Dictionary<WeaponType, int> _codeRegistry = new Dictionary<WeaponType, int>();
+
+        //public void RegisterCode(WeaponType type, int code){
+        //    _codeRegistry.Add(type, code);
+        //}
+
+        //public int GetCode(WeaponType type)
+        //{
+        //    if (_codeRegistry.ContainsKey(type))
+        //    {
+        //        return _codeRegistry[type];
+        //    }
+        //    // exception handling - check if code exists
+        //    return -1;
+        //}
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.Weapons {
 
-    public interface IWeapon{
+    public interface IWeapon {
         IWeaponBlueprint blueprint { get; }
         void Launch();
     }

@@ -12,13 +12,11 @@ using System.Globalization;
 namespace BombCraftingSimulator.Builder
 {
 
-    interface IWeaponFactory
-    {
-        public IWeapon Construct(WeaponFamilies family, int version);
+    interface IWeaponFactory {
+        public IWeapon Construct(WeaponBlueprint blueprint);
     }
 
-     public class ArmyFactory : IWeaponFactory // Director class of BuilderFactory
-    {
+     public class ArmyFactory : IWeaponFactory { // Director class of BuilderFactory
         public IWeapon weapon { get; set; }
         public IWeaponBlueprint weaponblueprint { get; set; }
 
@@ -29,38 +27,32 @@ namespace BombCraftingSimulator.Builder
             
         }
 
-        public void changeBuilder(IWeaponBuilder builderfactory)
-        {
+        public void changeBuilder(IWeaponBuilder builderfactory) {
             this._weaponbuilder = builderfactory;
         }
 
         // Method to construct a weapon based on the specified family and version
-        public IWeapon Construct(WeaponFamilies family, int version)
-        {
+        public IWeapon Construct(WeaponBlueprint blueprint) {
+            WeaponFamily family = blueprint.WeaponFamily;
+            int version = blueprint.version;
 
             // Retrieve the builder and blueprint for the specified family and version
-            var (_builder, _blueprint) = GetWeaponManufactures(family, version);
-            _weaponbuilder = _builder;
+            IWeaponBuilder _weaponbuilder = GetWeaponBuilder(blueprint);
 
             // Build the various components of the weapon if their blueprints are not null
-            if (_blueprint.CasingBlueprint != null)
-            {
+            if (blueprint.CasingBlueprint != null){
                 _weaponbuilder.BuildMetalCasing();
             }
-            if (_blueprint.ExplosiveBlueprint != null)
-            {
+            if (blueprint.ExplosiveBlueprint != null){
                 _weaponbuilder.BuildExplosives();
             }
-            if (_blueprint.GuidanceKitBlueprint != null)
-            {
+            if (blueprint.GuidanceKitBlueprint != null){
                 _weaponbuilder.BuildGuidanceKit();
             }
-            if (_blueprint.DetonationBlueprint != null)
-            {
+            if (blueprint.DetonationBlueprint != null){
                 _weaponbuilder.BuildDetonation();
             }
-            if (_blueprint.LauncherBlueprint != null)
-            {
+            if (blueprint.LauncherBlueprint != null){
                 _weaponbuilder.BuildLauncher();
             }
 
@@ -69,45 +61,34 @@ namespace BombCraftingSimulator.Builder
         }
 
         // Private method to get the weapon builder and blueprint for the specified family and version
-        private (IWeaponBuilder, IWeaponBlueprint) GetWeaponManufactures(WeaponFamilies family, int version)
-        {
-
-            // Retrieve the blueprint for the specified family and version from the repository
-            IWeaponBlueprint blueprint = CReasearchAndDevelopment.GetInstance().GetBlueprint(family, version);
-
+        private IWeaponBuilder GetWeaponBuilder(WeaponBlueprint blueprint) {
             // Throw an exception if the blueprint is invalid
-            if (blueprint == null)
-            {
+            if (blueprint == null) {
                 throw new ArgumentException("Invalid weapon version");
             }
-
+            blueprint.version = blueprint.version;
             // Return the appropriate builder and blueprint based on the weapon family
-            switch (family)
-            {
-                case WeaponFamilies.FAB:
+            switch (blueprint.WeaponFamily) {
+                case WeaponFamily.FAB:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    CFABFactory fabFactory = new CFABFactory(version);
-                    return (new CFABBuilder(fabFactory), blueprint);
-                case WeaponFamilies.MOAB:
+                    CFABFactory fabFactory = new CFABFactory(blueprint);
+                return new CFABBuilder(fabFactory);
+                case WeaponFamily.MOAB:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    CJDAMFactory jdamFactory = new CJDAMFactory(version);
-                    return (new CJDAMBuilder(jdamFactory), blueprint);
-                case WeaponFamilies.JDAM:
+                    CJDAMFactory jdamFactory = new CJDAMFactory(blueprint);
+                return new CJDAMBuilder(jdamFactory);
+                case WeaponFamily.JDAM:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    CMOABFactory moabFactory = new CMOABFactory(version);
-                    return (new CMOABBuilder(moabFactory), blueprint);
-                case WeaponFamilies.X69:
+                    CMOABFactory moabFactory = new CMOABFactory(blueprint);
+                return new CMOABBuilder(moabFactory);
+                case WeaponFamily.X69:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    CX69Factory x69Factory = new CX69Factory(version);
-                    return (new CX69Builder(x69Factory), blueprint);
+                    CX69Factory x69Factory = new CX69Factory(blueprint);
+                return new CX69Builder(x69Factory);
                 default:
                     // Throw an exception if the weapon family is invalid
-                    throw new ArgumentException("Invalid weapon family");
+                throw new ArgumentException("Invalid weapon family");
             }
         }
-
-
-    }
-
-    
+     }
 }

@@ -24,11 +24,11 @@ namespace BombCraftingSimulator
             
         }
 
-        public IWeapon construct(WeaponFamilies family, int version)
+        public IWeapon construct(WeaponBlueprint blueprint)
         {
             ArmyFactory director = new ArmyFactory();
             
-            return director.Construct(family, version); 
+            return director.Construct(blueprint); 
         }
     }
 }

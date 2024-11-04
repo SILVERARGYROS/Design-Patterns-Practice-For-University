@@ -4,6 +4,8 @@ using BombCraftingSimulator.WeaponSpecs;
 using System.Collections.Generic;
 using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.MinistryOfNationalDefence;
+using BombCraftingSimulator.Builder;
+using BombCraftingSimulator.Weapons.Bombs;
 
 namespace BombCraftingSimulator {
     class Program {
@@ -11,10 +13,13 @@ namespace BombCraftingSimulator {
             Console.WriteLine("Hello World!");
 
             //https://refactoring.guru/design-patterns/singleton
-            ArmyCommand armyCommand = ArmyCommand.getInstance();
-
+            ArmyCommand armyCommand = ArmyCommand.GetInstance();
+            WeaponBlueprint blueprint = armyCommand.RequestWeaponΒlueprint(WeaponFamily.MOAB, 0);
             // might implement a menu here
-
+            
+            WeaponConstructor weapon_constructor = new WeaponConstructor();
+            IWeapon bomb = weapon_constructor.construct(blueprint);
+            bomb.Launch();
         }
     }
 

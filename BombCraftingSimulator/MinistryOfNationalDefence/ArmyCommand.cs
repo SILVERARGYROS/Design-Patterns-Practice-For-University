@@ -14,9 +14,11 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
     {
         //https://refactoring.guru/design-patterns/singleton
         private static ArmyCommand instance;
+        private static Object mutex;
 
         private IWeaponBlueprint _blueprint;
         private IWeapon _weapon;
+        private RND rnd = new RND();
 
         private ArmyCommand()
         {
@@ -24,11 +26,16 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
         }
 
 
-        public static ArmyCommand getInstance()
+        public static ArmyCommand GetInstance()
         {
             if (instance == null)
             {
-                lock (instance)
+                // To make sure the mutex object is initialized only once
+                if (mutex == null) {
+                    mutex = new Object();
+                }
+
+                lock (mutex)
                 {
                     if (instance == null)
                     {
@@ -40,23 +47,23 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
         }
 
         // IWeapon
-        public void RequestsWeapon(ArmyFactory army_factory, WeaponFamily family, int version)
+        public void RequestsWeapon(ArmyFactory army_factory, WeaponBlueprint blueprint)
         {
-            army_factory.Construct(family, version);
+            army_factory.Construct(blueprint);
         }
 
         //Make a Request Approval Process to the recipient
         //IWeaponBluePrint
-        public void RequestsWeaponΒlueprints(RND rnd, WeaponFamily family, int version)
+        public WeaponBlueprint RequestWeaponΒlueprint(WeaponFamily family, int version)
         {
-            rnd.GetBlueprint(family, version);
+            return rnd.GetBlueprint(family, version);
         }
 
-        public List<String> RequestWeaponTypes(RND rnd) {
+        public List<String> RequestWeaponTypes() {
             return rnd.GetWeaponTypes();
         }
 
-        public List<String> RequestWeaponFamilies(RND rnd) {
+        public List<String> RequestWeaponFamilies() {
             return rnd.GetWeaponFamilies();
         }
     }

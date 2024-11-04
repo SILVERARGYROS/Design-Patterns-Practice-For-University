@@ -27,7 +27,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
 
         public void Launch()
         {
-            Console.WriteLine("boom");
+            Console.WriteLine("FAB goes boom");
         }
 
         public override string ToString()

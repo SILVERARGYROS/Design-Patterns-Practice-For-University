@@ -26,7 +26,7 @@ namespace BombCraftingSimulator.Blueprints
         public int version { get; set; }
         public VelocityType CruiseSpeed { get; set; }
         public WeaponType WeaponType { get; set; }
-        public WeaponFamilies WeaponFamily { get; set; }
+        public WeaponFamily WeaponFamily { get; set; }
         public LauncherType LancherType { get; set; }
         
 

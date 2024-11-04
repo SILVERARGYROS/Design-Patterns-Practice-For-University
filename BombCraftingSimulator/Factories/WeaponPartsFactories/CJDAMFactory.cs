@@ -15,10 +15,10 @@ namespace BombCraftingSimulator.Factories
         public IWeaponBlueprint blueprint { get; }
 
         // Constructor to initialize the factory with a specific version of the FAB weapon
-        public CJDAMFactory(int FABversion)
+        public CJDAMFactory(WeaponBlueprint blueprint)
         {
             // Retrieve the blueprint for the specified version from the repository
-            blueprint = CReasearchAndDevelopment.instance.GetBlueprint(WeaponFamilies.JDAM, FABversion);
+           this.blueprint = blueprint;
         }
 
         // Method to create a metal casing blueprint using the details from the retrieved blueprint

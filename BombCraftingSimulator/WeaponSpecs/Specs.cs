@@ -43,7 +43,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
         Hybrid
     }
 
-    public enum LancherType {
+    public enum LauncherType {
         Mortar,
         Howitzer,
         Cannon,

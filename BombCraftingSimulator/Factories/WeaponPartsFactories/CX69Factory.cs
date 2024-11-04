@@ -15,10 +15,10 @@ namespace BombCraftingSimulator.Factories
         public IWeaponBlueprint blueprint { get; }
 
         // Constructor to initialize the factory with a specific version of the FAB weapon
-        public CX69Factory(int FABversion)
+        public CX69Factory(WeaponBlueprint blueprint)
         {
             // Retrieve the blueprint for the specified version from the repository
-            blueprint = CReasearchAndDevelopment.instance.GetBlueprint(WeaponFamilies.X69, FABversion);
+            this.blueprint = blueprint;
         }
 
         // Method to create a metal casing blueprint using the details from the retrieved blueprint
