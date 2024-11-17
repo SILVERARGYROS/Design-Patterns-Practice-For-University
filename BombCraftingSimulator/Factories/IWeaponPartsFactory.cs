@@ -2,23 +2,23 @@
 using BombCraftingSimulator.Blueprints;
 using BombCraftingSimulator.WeaponSpecs.WeaponParts; 
 
-public interface IAbstractWeaponPartsFactory
+public interface IWeaponPartsFactory
 {
     // Method to create a metal casing 
-    MetalCase CreateMetalCasing();
+    MetalCase BuildMetalCasing();
 
     // Method to create an explosive 
-    Explosive CreateExplosive();
+    Explosive BuildExplosive();
 
     // Method to create a guidance kit 
-    GuidanceKit CreateGuidanceKit();
+    GuidanceKit BuildGuidanceKit();
 
     // Method to create a detonation 
-    Detonation CreateDetonation();
+    Detonation BuildDetonation();
 
     // Method to create a launcher 
-    Launcher CreateLauncher();
+    Launcher BuildLauncher();
 
     // Method to create a propulsion 
-    Propulsion CreatePropulsion();
+    Propulsion BuildPropulsion();
 }

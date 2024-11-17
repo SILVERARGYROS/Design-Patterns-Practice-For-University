@@ -27,7 +27,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
 
         public WeaponBlueprint GetBlueprint(WeaponFamily family, int code) {
             if (_blueprintRegistry.ContainsKey((family, code))) {
-                return _blueprintRegistry[(family, code)];
+                return (WeaponBlueprint) _blueprintRegistry[(family, code)].Clone();
             }
             // exception handling - check if code exists
             return null;

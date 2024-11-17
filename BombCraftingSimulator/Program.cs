@@ -4,21 +4,22 @@ using BombCraftingSimulator.WeaponSpecs;
 using System.Collections.Generic;
 using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.MinistryOfNationalDefence;
-using BombCraftingSimulator.Builder;
 using BombCraftingSimulator.Weapons.Bombs;
+using BombCraftingSimulator.Builder;
 
 namespace BombCraftingSimulator {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("Hello World!");
 
-            //https://refactoring.guru/design-patterns/singleton
+            // https://refactoring.guru/design-patterns/singleton
             ArmyCommand armyCommand = ArmyCommand.GetInstance();
             WeaponBlueprint blueprint = armyCommand.RequestWeaponΒlueprint(WeaponFamily.MOAB, 0);
             // might implement a menu here
             
-            WeaponConstructor weapon_constructor = new WeaponConstructor();
-            IWeapon bomb = weapon_constructor.construct(blueprint);
+            ArmyFactory armyFactory = new ArmyFactory();
+
+            IWeapon bomb = armyFactory.RequestBomb(blueprint);
             bomb.Launch();
         }
     }
@@ -33,7 +34,7 @@ namespace BombCraftingSimulator {
 
     public class CFABBuilder : IWeaponBuilder{
         IWeaponBlueprint blueprint;
-        FABBomb _bomb;
+        FAB _bomb;
 
         public CFABBuilder(IWeaponBlueprint blueprint) {
             this.blueprint = blueprint;
@@ -54,8 +55,8 @@ namespace BombCraftingSimulator {
         public void BuildDetonation() {
             Console.WriteLine($"Building metal detonation for {_bomb}");
         }
-        public FABBomb GetProduct() {
-            return new FABBomb(blueprint);
+        public FAB GetProduct() {
+            return new FAB(blueprint);
         }
     }
 }

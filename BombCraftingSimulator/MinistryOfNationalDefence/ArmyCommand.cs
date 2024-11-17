@@ -49,7 +49,7 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
         // IWeapon
         public void RequestsWeapon(ArmyFactory army_factory, WeaponBlueprint blueprint)
         {
-            army_factory.Construct(blueprint);
+            army_factory.RequestBomb(blueprint);
         }
 
         //Make a Request Approval Process to the recipient

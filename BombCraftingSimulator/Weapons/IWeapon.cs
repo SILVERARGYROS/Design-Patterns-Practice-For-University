@@ -11,8 +11,4 @@ namespace BombCraftingSimulator.Weapons {
         IWeaponBlueprint blueprint { get; }
         void Launch();
     }
-
-
-
-
 }

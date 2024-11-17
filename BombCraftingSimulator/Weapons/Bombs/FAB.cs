@@ -9,7 +9,7 @@ using BombCraftingSimulator.WeaponSpecs.WeaponParts;
 
 namespace BombCraftingSimulator.Weapons.Bombs
 {
-    public class FABBomb : IWeapon
+    public class FAB : IWeapon
     {
         public IWeaponBlueprint blueprint { get; }
 
@@ -20,7 +20,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
         public Propulsion _propulsion   { get; set; }
         public GuidanceKit _guidancekit { get; set; }
 
-        public FABBomb(IWeaponBlueprint blueprint)
+        public FAB(IWeaponBlueprint blueprint)
         {
             this.blueprint = blueprint;
         }
