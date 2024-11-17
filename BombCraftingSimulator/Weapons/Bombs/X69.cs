@@ -24,9 +24,9 @@ namespace BombCraftingSimulator.Weapons.Bombs
             this.blueprint = blueprint;
         }
 
-        public void Launch()
+        public String Launch()
         {
-            Console.WriteLine("X69 goes boom");
+            return "X69 goes boom.";
         }
 
         public override string ToString()

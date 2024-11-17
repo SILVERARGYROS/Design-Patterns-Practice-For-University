@@ -9,6 +9,6 @@ namespace BombCraftingSimulator.Weapons {
 
     public interface IWeapon {
         IWeaponBlueprint blueprint { get; }
-        void Launch();
+        String Launch();
     }
 }

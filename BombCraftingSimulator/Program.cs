@@ -6,6 +6,7 @@ using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.MinistryOfNationalDefence;
 using BombCraftingSimulator.Weapons.Bombs;
 using BombCraftingSimulator.Builder;
+using BombCraftingSimulator.Decorators.BombDecorators;
 
 namespace BombCraftingSimulator {
     class Program {
@@ -19,8 +20,17 @@ namespace BombCraftingSimulator {
             
             ArmyFactory armyFactory = new ArmyFactory();
 
+            // Decorating bomb
             IWeapon bomb = armyFactory.RequestBomb(blueprint);
-            bomb.Launch();
+            ColorBombDecorator d1 = new ColorBombDecorator(bomb, "red");
+            ElementBombDecorator d2 = new ElementBombDecorator(d1, "fire");
+            SoundEffectBombDecorator d3 = new SoundEffectBombDecorator(d2, "mpammpum");
+            IWeapon finalBomb = d3;
+
+            // Launching the final bomb
+            Console.WriteLine();
+            Console.WriteLine(finalBomb.Launch());
+            
         }
     }
 
