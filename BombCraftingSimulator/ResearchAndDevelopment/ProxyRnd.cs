@@ -30,8 +30,10 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
         }
         public WeaponBlueprint GetBlueprint(WeaponFamily family, int code) {
             if (!isAuthorized()) {
+                Program.Print("Caller not authorized to access RND", "DarkRed");
                 return null;
             }
+            Program.Print("Verification complete. Caller authorized to access RND", "Blue");
 
             initializeInstance();
             return instance.GetBlueprint(family, code);

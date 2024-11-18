@@ -11,13 +11,13 @@ using BombCraftingSimulator.Decorators.BombDecorators;
 namespace BombCraftingSimulator {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
+            Program.Print("Hello World", "DarkRed");
 
             // https://refactoring.guru/design-patterns/singleton
             ArmyCommand armyCommand = ArmyCommand.GetInstance();
             WeaponBlueprint blueprint = armyCommand.RequestWeaponΒlueprint(WeaponFamily.MOAB, 0);
             // might implement a menu here
-            
+
             ArmyFactory armyFactory = new ArmyFactory();
 
             // Decorating bomb
@@ -30,43 +30,21 @@ namespace BombCraftingSimulator {
             // Launching the final bomb
             Console.WriteLine();
             Console.WriteLine(finalBomb.Launch());
-            
-        }
-    }
-
-    public interface IWeaponBuilder {
-        void BuildMetalCasing();
-        void BuildExplosives();
-        void BuildPropulsion();
-        void BuildGuidanceKit();
-        void BuildDetonation();
-    }
-
-    public class CFABBuilder : IWeaponBuilder{
-        IWeaponBlueprint blueprint;
-        FAB _bomb;
-
-        public CFABBuilder(IWeaponBlueprint blueprint) {
-            this.blueprint = blueprint;
         }
 
-        public void BuildMetalCasing() {
-            Console.WriteLine($"Building metal casing for {_bomb}");
-        }
-        public void BuildExplosives() {
-            Console.WriteLine($"Building metal explosives for {_bomb}");
-        }
-        public void BuildPropulsion() {
-            Console.WriteLine($"Building metal propulsion for {_bomb}");
-        }
-        public void BuildGuidanceKit() {
-            Console.WriteLine($"Building metal guidance for {_bomb}");
-        }
-        public void BuildDetonation() {
-            Console.WriteLine($"Building metal detonation for {_bomb}");
-        }
-        public FAB GetProduct() {
-            return new FAB(blueprint);
+        private static Boolean DebugPrintsActivated = true;
+
+        public static void Print(string message, string color) {
+            if (DebugPrintsActivated) {
+                // Change the Console.Foregroundcolor from a string: https://stackoverflow.com/questions/30799107/change-the-console-foregroundcolor-from-a-string
+                ConsoleColor c;
+                if (Enum.TryParse(color, out c)) {
+                    Console.ForegroundColor = c;
+                }
+
+                Console.WriteLine(message);
+                Console.ResetColor();
+            }
         }
     }
 }

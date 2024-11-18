@@ -12,15 +12,19 @@ namespace BombCraftingSimulator.Factories {
         IWeaponPartsFactory GetWeaponPartsFactory(IWeaponBlueprint blueprint) {
             WeaponFamily weaponFamily = blueprint.WeaponFamily;
             if (weaponFamily == WeaponFamily.FAB) {
+                Program.Print("Selected FAB weapon factory.", "Green");
                 return new CFABPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.JDAM) {
+                Program.Print("Selected JDAM weapon factory.", "Green");
                 return new CFABPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.MOAB) {
+                Program.Print("Selected MOAB weapon factory.", "Green");
                 return new CFABPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.X69) {
+                Program.Print("Selected X69 weapon factory.", "Green");
                 return new CFABPartsFactory(blueprint);
             } else {
-                Console.WriteLine("Factory family not found. Returning NULL WeaponPart Factory.");
+                Program.Print("Factory family not found. Returning NULL WeaponPart Factory.", "DarkRed");
                 return null;
             }
         }

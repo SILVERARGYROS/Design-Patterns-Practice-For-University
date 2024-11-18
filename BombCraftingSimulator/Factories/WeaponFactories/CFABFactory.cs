@@ -13,9 +13,7 @@ using System.Threading.Tasks;
 namespace BombCraftingSimulator.Factories.WeaponFactories
 {
 
-    // Class to create various parts of the FAB weapon using a factory design pattern
-    public class CFABFactory : IWeaponFactory
-    {
+    public class CFABFactory : IWeaponFactory{
 
         // Private fields to hold the weapon blueprint and corresponding factory
         private IWeaponBlueprint blueprint;
@@ -36,8 +34,8 @@ namespace BombCraftingSimulator.Factories.WeaponFactories
         }
 
         public IWeapon BuildWeapon() {
-            Console.WriteLine("Gathering weapon parts.");
 
+            Program.Print("Gathering weapon parts.", "Green");
             metalCase = weaponPartsFactory.BuildMetalCasing();
             explosive = weaponPartsFactory.BuildExplosive();
             guidanceKit = weaponPartsFactory.BuildGuidanceKit();
@@ -45,7 +43,7 @@ namespace BombCraftingSimulator.Factories.WeaponFactories
             launcher = weaponPartsFactory.BuildLauncher();
             propulsion = weaponPartsFactory.BuildPropulsion();
 
-            Console.WriteLine("Constructing weapon...");
+            Program.Print("Constructing weapon.", "Green");
             metalCase = null;
             explosive = null;
             guidanceKit = null;
@@ -53,7 +51,7 @@ namespace BombCraftingSimulator.Factories.WeaponFactories
             launcher = null;
             propulsion = null;
 
-            Console.WriteLine("Passing back freshly created.");
+            Program.Print("Passing back freshly created.", "Green");
             return new FAB(blueprint);
         }
     }

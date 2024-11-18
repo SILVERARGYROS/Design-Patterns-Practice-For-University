@@ -23,6 +23,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
         public JDAM(IWeaponBlueprint blueprint)
         {
             this.blueprint = blueprint;
+            Program.Print("Created JDAM.", "Green");
         }
 
         public String Launch()

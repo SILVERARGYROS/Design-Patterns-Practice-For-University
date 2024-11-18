@@ -23,6 +23,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
         public FAB(IWeaponBlueprint blueprint)
         {
             this.blueprint = blueprint;
+            Program.Print("Created FAB.", "Green");
         }
 
         public String Launch()

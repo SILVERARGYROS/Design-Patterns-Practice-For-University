@@ -14,45 +14,49 @@ namespace BombCraftingSimulator.Factories.WeaponFactories
         // Private field to hold the weapon blueprint
         public IWeaponBlueprint blueprint { get; }
 
-        // Constructor to initialize the factory with a specific version of the FAB weapon
         public CX69PartsFactory(IWeaponBlueprint blueprint)
         {
-            // Retrieve the blueprint for the specified version from the repository
             this.blueprint = blueprint;
         }
 
         // Method to create a metal casing blueprint using the details from the retrieved blueprint
         public MetalCase BuildMetalCasing()
         {
+            Program.Print("Building X69 metal casing.", "Green");
             return new MetalCase(blueprint.CasingBlueprint);
         }
 
         // Method to create an explosive blueprint using the details from the retrieved blueprint
         public Explosive BuildExplosive()
         {
+            Program.Print("Building X69 explosive.", "Green");
             return new Explosive(blueprint.ExplosiveBlueprint);
         }
 
         // Method to create a guidance kit blueprint using the details from the retrieved blueprint
         public GuidanceKit BuildGuidanceKit()
         {
+            Program.Print("Building X69 guidance kit.", "Green");
             return new GuidanceKit(blueprint.GuidanceKitBlueprint);
         }
 
         // Method to create a detonation blueprint using the details from the retrieved blueprint
         public Detonation BuildDetonation()
         {
+            Program.Print("Building X69 detonation.", "Green");
             return new Detonation(blueprint.DetonationBlueprint);
         }
 
         // Method to create a launcher blueprint using the details from the retrieved blueprint
         public Launcher BuildLauncher()
         {
+            Program.Print("Building X69 launcher.", "Green");
             return new Launcher(blueprint.LauncherBlueprint);
         }
 
         public Propulsion BuildPropulsion()
         {
+            Program.Print("Building X69 propulsion.", "Green");
             return new Propulsion(blueprint.PropulsionBlueprint);
         }
     }

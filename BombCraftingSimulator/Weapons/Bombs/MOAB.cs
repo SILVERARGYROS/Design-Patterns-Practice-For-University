@@ -22,6 +22,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
         public MOAB(IWeaponBlueprint blueprint)
         {
             this.blueprint = blueprint;
+            Program.Print("Created MOAB.", "Green");
         }
 
         public String Launch()

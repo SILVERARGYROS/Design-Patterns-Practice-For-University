@@ -22,6 +22,7 @@ namespace BombCraftingSimulator.Weapons.Bombs
         public X69(IWeaponBlueprint blueprint)
         {
             this.blueprint = blueprint;
+            Program.Print("Created X69.", "Green");
         }
 
         public String Launch()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +38,34 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
             return instance;
         }
 
-        private void initializeBlueprintRegistery() {   // Need to implement a more dynamic way later
+        private void initializeBlueprintRegistery() { // Need to implement a more dynamic way later
+            //// Get current dir in a class library: https://stackoverflow.com/questions/27233853/get-current-dir-in-a-class-library
+            //String path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+            //// Use Visual C# to read from and write to a text file: https://learn.microsoft.com/en-us/troubleshoot/developer/visualstudio/csharp/language-compilers/read-write-text-file
+            //StreamReader sr = new StreamReader(path);
+            //String line = sr.ReadLine();
+
+            ////Continue to read until you reach end of file
+            //while (line != null) {
+            //    String[] lineParts = line.Split(";");
+            //    int version = int.Parse(lineParts[0]);
+
+            //    // How to get a enum value from string in C#: https://stackoverflow.com/questions/1578775/how-to-get-a-enum-value-from-string-in-c
+            //    WeaponFamily family;
+            //    if (Enum.TryParse("HKEY_LOCAL_MACHINE", out family)) {
+            //    uint value = (uint)family;
+            //        RegisterBlueprint(family, version, new WeaponBlueprint());
+            //    }
+            //    else {
+            //        Program.print("line in file: \"" + line + "\" was not registered.", "DarkRed");
+            //    }
+
+            //    //Read the next line
+            //    line = sr.ReadLine();
+            //}
+            //sr.Close();
+
             RegisterBlueprint(WeaponFamily.FAB, 0, new WeaponBlueprint());
             RegisterBlueprint(WeaponFamily.MOAB, 0, new WeaponBlueprint());
             RegisterBlueprint(WeaponFamily.X69, 0, new WeaponBlueprint());
