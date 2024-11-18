@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.Decorators.BombDecorators {
@@ -21,8 +22,8 @@ namespace BombCraftingSimulator.Decorators.BombDecorators {
         }
 
         public String Launch() {
-
-            return wrappedBomb.Launch().Replace("boom", soundEffect);
+            // Regex source: https://stackoverflow.com/questions/24465512/regular-expression-to-match-everything-until-the-last-occurrence-of
+            return Regex.Replace(wrappedBomb.Launch(), @"goes ([^\/]*)\.", "goes " + soundEffect + ".");
         }
 
         public override string ToString() {

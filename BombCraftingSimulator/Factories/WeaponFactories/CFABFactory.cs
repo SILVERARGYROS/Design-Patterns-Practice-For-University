@@ -51,7 +51,7 @@ namespace BombCraftingSimulator.Factories.WeaponFactories
             launcher = null;
             propulsion = null;
 
-            Program.Print("Passing back freshly created.", "Green");
+            Program.Print("Passing back freshly created weapon.", "Green");
             return new FAB(blueprint);
         }
     }

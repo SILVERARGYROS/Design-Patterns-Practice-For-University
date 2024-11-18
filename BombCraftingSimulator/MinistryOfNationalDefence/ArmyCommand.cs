@@ -11,9 +11,9 @@ using BombCraftingSimulator.ResearchAndDevelopment;
 
 namespace BombCraftingSimulator.MinistryOfNationalDefence
 {
-    public class ArmyCommand
-    {
-        //https://refactoring.guru/design-patterns/singleton
+    public class ArmyCommand {
+
+        // Singleton Pattern: https://refactoring.guru/design-patterns/singleton
         private static ArmyCommand instance;
         private static Object mutex;
 
@@ -47,16 +47,18 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
             return instance;
         }
 
-        // IWeapon
-        public void RequestsWeapon(ArmyFactory army_factory, WeaponBlueprint blueprint)
-        {
-            army_factory.RequestBomb(blueprint);
+        // Army Factory Methods
+        public IWeapon RequestsWeapon(ArmyFactory army_factory, WeaponBlueprint blueprint) {
+            return army_factory.RequestBomb(blueprint);
         }
 
-        //Make a Request Approval Process to the recipient
-        //IWeaponBluePrint
-        public WeaponBlueprint RequestWeaponΒlueprint(WeaponFamily family, int version)
-        {
+        // IRND Methods
+        public void RegisterBlueprint(WeaponFamily family, int code, WeaponBlueprint blueprint) {
+            rnd.RegisterBlueprint(family, code, blueprint);
+        }
+
+        public WeaponBlueprint RequestWeaponΒlueprint(WeaponFamily family, int version) {
+            Program.Print("Requesting blueprint for " + family + " version " + version + " from proxy RND.", "Blue");
             return rnd.GetBlueprint(family, version);
         }
 
@@ -66,6 +68,18 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
 
         public List<String> RequestWeaponFamilies() {
             return rnd.GetWeaponFamilies();
+        }
+
+        public WeaponFamily GetWeaponFamilyFromString(String family) {
+            return rnd.GetFamilyFromString(family);
+        }
+
+        public List<int> RequestFamilyCodes(WeaponFamily family) {
+            return rnd.GetRegisteredFamilyCodes(family);
+        }
+
+        public IEnumerable<IWeaponStats> RequestStats() {
+            return rnd.Stats();
         }
     }
 }

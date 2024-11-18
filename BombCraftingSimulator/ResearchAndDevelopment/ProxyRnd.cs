@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.ResearchAndDevelopment {
-    class ProxyRnd : IRnd{
+    class ProxyRnd : IRnd {
 
         private static Rnd instance = null;
 
@@ -34,7 +34,7 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
                 return null;
             }
             Program.Print("Verification complete. Caller authorized to access RND", "Blue");
-
+            Program.Print("Requesting blueprint for " + family + " version " + code + " from concrete RND.", "Blue");
             initializeInstance();
             return instance.GetBlueprint(family, code);
         }
@@ -81,7 +81,7 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
             }
 
             initializeInstance();
-            return instance. GetWeaponFamilies();
+            return instance.GetWeaponFamilies();
         }
 
         public IEnumerable<IWeaponStats> Stats() {
@@ -91,6 +91,10 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
 
             initializeInstance();
             return instance.Stats();
+        }
+
+        public WeaponFamily GetFamilyFromString(String familyString) {
+            return instance.GetFamilyFromString(familyString);
         }
     }
 }

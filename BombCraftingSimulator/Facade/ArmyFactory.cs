@@ -34,25 +34,36 @@ namespace BombCraftingSimulator.Builder
         private IWeaponFactory GetWeaponFactory(WeaponBlueprint blueprint) {
             // Throw an exception if the blueprint is invalid
             if (blueprint == null) {
-                throw new ArgumentException("Invalid weapon version");
+                Program.Print("Invalid blueprint.", "DarkRed");
+                throw new ArgumentException("Invalid blueprint");
             }
+
             blueprint.version = blueprint.version;
             // Return the appropriate builder and blueprint based on the weapon family
             switch (blueprint.WeaponFamily) {
                 case WeaponFamily.FAB:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    return new CFABFactory(blueprint);
+                    Program.Print("Getting factory for FAB.", "Green");
+                return new CFABFactory(blueprint);
                 case WeaponFamily.MOAB:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    return new CJDAMFactory(blueprint);
+                    Program.Print("Getting factory for MOAB.", "Green");
+
+                return new CMOABFactory(blueprint);
                 case WeaponFamily.JDAM:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    return new CMOABFactory(blueprint);
+                    Program.Print("Getting factory for JDAM.", "Green");
+
+                return new CJDAMFactory(blueprint);
                 case WeaponFamily.X69:
                     // Create a factory for FAB weapon parts and return the builder and blueprint
-                    return new CX69Factory(blueprint);
+                    Program.Print("Getting factory for X89.", "Green");
+
+                return new CX69Factory(blueprint);
                 default:
                     // Throw an exception if the weapon family is invalid
+                    Program.Print("Invalid weapon family.", "DarkRed");
+
                 throw new ArgumentException("Invalid weapon family");
             }
         }

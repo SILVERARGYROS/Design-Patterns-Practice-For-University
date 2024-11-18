@@ -1,4 +1,5 @@
 ﻿using BombCraftingSimulator.Blueprints;
+using BombCraftingSimulator.Factories.WeaponFactories;
 using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.WeaponSpecs;
 using System;
@@ -16,13 +17,13 @@ namespace BombCraftingSimulator.Factories {
                 return new CFABPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.JDAM) {
                 Program.Print("Selected JDAM weapon factory.", "Green");
-                return new CFABPartsFactory(blueprint);
+                return new CJDAMPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.MOAB) {
                 Program.Print("Selected MOAB weapon factory.", "Green");
-                return new CFABPartsFactory(blueprint);
+                return new CMOABPartsFactory(blueprint);
             } else if (weaponFamily == WeaponFamily.X69) {
                 Program.Print("Selected X69 weapon factory.", "Green");
-                return new CFABPartsFactory(blueprint);
+                return new CX69PartsFactory(blueprint);
             } else {
                 Program.Print("Factory family not found. Returning NULL WeaponPart Factory.", "DarkRed");
                 return null;

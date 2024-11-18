@@ -65,16 +65,30 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
             //    line = sr.ReadLine();
             //}
             //sr.Close();
+            _blueprintRegistry.Clear();
+            RegisterBlueprint(WeaponFamily.FAB, 1, new WeaponBlueprint(WeaponFamily.FAB, 1));
+            RegisterBlueprint(WeaponFamily.MOAB, 1, new WeaponBlueprint(WeaponFamily.MOAB, 1));
+            RegisterBlueprint(WeaponFamily.X69, 1, new WeaponBlueprint(WeaponFamily.X69, 1));
+            RegisterBlueprint(WeaponFamily.JDAM, 1, new WeaponBlueprint(WeaponFamily.JDAM, 1));
 
-            RegisterBlueprint(WeaponFamily.FAB, 0, new WeaponBlueprint());
-            RegisterBlueprint(WeaponFamily.MOAB, 0, new WeaponBlueprint());
-            RegisterBlueprint(WeaponFamily.X69, 0, new WeaponBlueprint());
-            RegisterBlueprint(WeaponFamily.JDAM, 0, new WeaponBlueprint());
+            RegisterBlueprint(WeaponFamily.FAB, 2, new WeaponBlueprint(WeaponFamily.FAB, 2));
+            RegisterBlueprint(WeaponFamily.MOAB, 2, new WeaponBlueprint(WeaponFamily.MOAB, 2));
+            RegisterBlueprint(WeaponFamily.X69, 2, new WeaponBlueprint(WeaponFamily.X69, 2));
+            RegisterBlueprint(WeaponFamily.JDAM, 2, new WeaponBlueprint(WeaponFamily.JDAM, 2));
+
+            RegisterBlueprint(WeaponFamily.FAB, 3, new WeaponBlueprint(WeaponFamily.FAB, 3));
+            RegisterBlueprint(WeaponFamily.MOAB, 3, new WeaponBlueprint(WeaponFamily.MOAB, 3));
+            RegisterBlueprint(WeaponFamily.X69, 3, new WeaponBlueprint(WeaponFamily.X69, 3));
+            RegisterBlueprint(WeaponFamily.JDAM, 3, new WeaponBlueprint(WeaponFamily.JDAM, 3));
         }
 
-        public WeaponBlueprint GetBlueprint(WeaponFamily family, int code) {
-            if (_blueprintRegistry.ContainsKey((family, code))) {
-                return (WeaponBlueprint) _blueprintRegistry[(family, code)].Clone();
+        public WeaponBlueprint GetBlueprint(WeaponFamily family, int version) {
+            if (_blueprintRegistry.ContainsKey((family, version))) {
+                Program.Print("Fetching blueprint for requested " + family + " version " + version, "Blue");
+                WeaponBlueprint blueprint = (WeaponBlueprint)_blueprintRegistry[(family, version)].Clone();
+                Program.Print("Fetched blueprint for requested " + blueprint.WeaponFamily + " version " + blueprint.version, "Blue");
+
+                return blueprint;
             }
             // exception handling - check if code exists
             return null;
@@ -102,7 +116,18 @@ namespace BombCraftingSimulator.ResearchAndDevelopment {
             return familyList;
         }
 
-        public List<int> GetRegisteredFamilyCodes(WeaponFamily family) {
+        public WeaponFamily GetFamilyFromString(String familyString) {
+            WeaponFamily family;
+            if (Enum.TryParse(familyString, out family)) {
+                uint value = (uint)family;
+                return family;
+            } else {
+                Program.Print("Weapon family type not found.", "DarkRed");
+                throw new Exception("Weapon family type not found.");
+            }
+        }
+
+            public List<int> GetRegisteredFamilyCodes(WeaponFamily family) {
             // How to get keys from hashmap in C#: https://stackoverflow.com/questions/1276763/how-do-i-get-the-list-of-keys-in-a-dictionary
             List<(WeaponFamily, int)> tupleList = new List<(WeaponFamily, int)>(_blueprintRegistry.Keys);
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BombCraftingSimulator.Blueprints;
 using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.Decorator;
+using System.Text.RegularExpressions;
 
 namespace BombCraftingSimulator.Decorators.BombDecorators {
     internal class ColorBombDecorator : IBombDecorator {
@@ -29,7 +30,7 @@ namespace BombCraftingSimulator.Decorators.BombDecorators {
             } catch (Exception) {
                 Console.WriteLine("Invalid Color. Selecting Default...");
             }
-            return newColor + wrappedBomb.Launch();
+            return newColor + " colored " + Regex.Replace(wrappedBomb.Launch(), @"^.* colored", "");
         }
 
         public override string ToString() {

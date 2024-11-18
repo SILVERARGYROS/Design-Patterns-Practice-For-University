@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.Decorators.BombDecorators {
@@ -21,7 +22,7 @@ namespace BombCraftingSimulator.Decorators.BombDecorators {
         }
 
         public String Launch() {
-            return wrappedBomb.Launch()+" (" + element + " explosion)";
+            return Regex.Replace(wrappedBomb.Launch(), @" \(^.* explosion\)", "") + " (" + element + " explosion)";
         }
 
         public override string ToString() {

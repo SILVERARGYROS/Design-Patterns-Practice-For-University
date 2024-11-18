@@ -32,7 +32,12 @@ namespace BombCraftingSimulator.Blueprints
 
         public WeaponBlueprint()
         {
+            
+        }
 
+        public WeaponBlueprint(WeaponFamily family, int version) {
+            this.WeaponFamily = family;
+            this.version = version;
         }
 
         // Implement the Clone() method for IPrototype<IWeaponBlueprint>
@@ -44,7 +49,9 @@ namespace BombCraftingSimulator.Blueprints
                 ExplosiveBlueprint = this.ExplosiveBlueprint?.Clone(),
                 DetonationBlueprint = this.DetonationBlueprint?.Clone(),
                 GuidanceKitBlueprint = this.GuidanceKitBlueprint?.Clone(),
-                PropulsionBlueprint = this.PropulsionBlueprint?.Clone()
+                PropulsionBlueprint = this.PropulsionBlueprint?.Clone(),
+                WeaponFamily = this.WeaponFamily,
+                version = this.version
             };
         }
     }

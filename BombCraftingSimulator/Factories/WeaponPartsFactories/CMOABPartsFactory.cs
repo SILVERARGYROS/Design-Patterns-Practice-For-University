@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace BombCraftingSimulator.Factories.WeaponFactories
 {
-    public class CMOABPartsFactory
-    {
+    public class CMOABPartsFactory : IWeaponPartsFactory {
         // Private field to hold the weapon blueprint
         public IWeaponBlueprint blueprint { get; }
 
