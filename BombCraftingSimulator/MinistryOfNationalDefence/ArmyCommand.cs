@@ -7,6 +7,7 @@ using BombCraftingSimulator.Weapons;
 using BombCraftingSimulator.Builder;
 using BombCraftingSimulator.Blueprints;
 using BombCraftingSimulator.WeaponSpecs;
+using BombCraftingSimulator.ResearchAndDevelopment;
 
 namespace BombCraftingSimulator.MinistryOfNationalDefence
 {
@@ -18,7 +19,7 @@ namespace BombCraftingSimulator.MinistryOfNationalDefence
 
         private IWeaponBlueprint _blueprint;
         private IWeapon _weapon;
-        private RND rnd = new RND();
+        private ProxyRnd rnd = new ProxyRnd();
 
         private ArmyCommand()
         {

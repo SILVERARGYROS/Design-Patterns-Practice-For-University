@@ -6,16 +6,34 @@ using System.Text;
 using System.Threading.Tasks;
 using BombCraftingSimulator.Blueprints;
 using BombCraftingSimulator.Weapons.Bombs;
+using BombCraftingSimulator.WeaponSpecs;
 
-namespace BombCraftingSimulator.WeaponSpecs {
-    public class RND {
-        private static RND instance;
+namespace BombCraftingSimulator.ResearchAndDevelopment {
+    public class Rnd : IRnd {
+        private static Rnd instance = null;
+        private static Object mutex;
 
         Dictionary<(WeaponFamily,int), WeaponBlueprint> _blueprintRegistry;
 
-        public RND() {
+        private Rnd() {
             _blueprintRegistry = new Dictionary<(WeaponFamily, int), WeaponBlueprint>();
             initializeBlueprintRegistery();
+        }
+
+        internal static Rnd GetInstance() {
+            if(instance == null) {
+                // To make sure the mutex object is initialized only once
+                if (mutex == null) {
+                    mutex = new Object();
+                }
+
+                lock (mutex) {
+                    if(instance == null) {
+                        instance = new Rnd();
+                    }
+                }
+            }
+            return instance;
         }
 
         private void initializeBlueprintRegistery() {   // Need to implement a more dynamic way later
@@ -92,7 +110,7 @@ namespace BombCraftingSimulator.WeaponSpecs {
                         types.Add("AntiInfrastructure");
                     break;
                     case WeaponType.Entry_Denial:
-                        types.Add("Entry_Denial");
+                        types.Add("EntryDenial");
                     break;
                     case WeaponType.Concealment:
                         types.Add("Concealment");
